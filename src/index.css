@@ -1,3 +1,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+.balance-enter {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 300ms ease-in-out, opacity 300ms ease-in-out;
+  }
+  
+  .balance-enter-active {
+    max-height: 100px; 
+    opacity: 1;
+  }
+  
+  .balance-exit {
+    max-height: 100px; 
+    opacity: 1;
+    overflow: hidden;
+    transition: max-height 300ms ease-in-out, opacity 300ms ease-in-out;
+  }
+  
+  .balance-exit-active {
+    max-height: 0;
+    opacity: 0;
+  }
+  

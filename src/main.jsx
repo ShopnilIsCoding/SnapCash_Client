@@ -13,6 +13,9 @@ import { AuthProvider } from './context/AuthContext';
 import  Root  from '../src/Layout/Root';
 import DashBoard from './Pages/DashBoard';
 import PrivateRoute from './Routes/PrivateRoutes';
+import ProtectedRoute from './Routes/ProtectedRoutes';
+import Account from './Components/User/Acount';
+import AgentAccount from './Components/Agent/AgentAccount';
 const router = createBrowserRouter([
   {
     path:"/",
@@ -21,6 +24,14 @@ const router = createBrowserRouter([
       {
         path:'/',
         element:<PrivateRoute><DashBoard></DashBoard></PrivateRoute>
+      },
+      {
+        path:'/account',
+        element:<PrivateRoute><ProtectedRoute allowedRoles={['user']}><Account></Account></ProtectedRoute></PrivateRoute>
+      },
+      {
+        path:'/agentAccount',
+        element:<PrivateRoute><ProtectedRoute allowedRoles={['agent']}><AgentAccount></AgentAccount></ProtectedRoute></PrivateRoute>
       }
     ]
   },

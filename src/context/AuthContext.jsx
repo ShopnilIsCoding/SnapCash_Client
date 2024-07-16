@@ -46,8 +46,23 @@ export const AuthProvider = ({ children }) => {
     delete axiosInstance.defaults.headers.common['Authorization'];
   };
 
+  const refetchUser = () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      axiosInstance.get(`/users/${email}`)
+        .then(response => {
+          setUser(response.data);
+        })
+        .catch((err) => {
+          console.log(err)
+          localStorage.removeItem('token');
+        });
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, logout ,refetchUser}}>
       {children}
     </AuthContext.Provider>
   );
